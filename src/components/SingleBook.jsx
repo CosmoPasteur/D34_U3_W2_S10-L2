@@ -1,12 +1,8 @@
-import { useCallback } from "react";
 import { Badge, Card, Col } from "react-bootstrap";
 // import CommentArea from "./CommentArea";
 
 const SingleBook = ({ book, selectedBookAsin, changeBookSelected }) => {
-  const checkSelected = useCallback(
-    () => (book.asin === selectedBookAsin ? "border-danger" : ""),
-    [book, selectedBookAsin]
-  );
+  const checkSelected = () => (book.asin === selectedBookAsin ? "border-danger" : "");
 
   return (
     <Col>

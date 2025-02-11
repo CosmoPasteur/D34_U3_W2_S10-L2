@@ -1,9 +1,8 @@
-import { Component } from "react";
 import { Button, ListGroupItem } from "react-bootstrap";
 
-class SingleComment extends Component {
-  handleDelete = () => {
-    fetch("https://striveschool-api.herokuapp.com/api/comments/" + this.props.review._id, {
+const SingleComment = ({ review, fetchComments }) => {
+  const handleDelete = () => {
+    fetch("https://striveschool-api.herokuapp.com/api/comments/" + review._id, {
       method: "DELETE",
       headers: {
         Authorization:
@@ -11,26 +10,24 @@ class SingleComment extends Component {
       },
     }).then((resp) => {
       if (resp.ok) {
-        this.props.fetchComments();
+        fetchComments();
       }
     });
   };
 
-  render() {
-    return (
-      <ListGroupItem className="d-flex justify-content-between">
-        <span>{this.props.review.comment}</span> <span>{this.props.review.rate}</span>
-        <Button
-          variant="danger"
-          onClick={() => {
-            this.handleDelete();
-          }}
-        >
-          🗑️
-        </Button>
-      </ListGroupItem>
-    );
-  }
-}
+  return (
+    <ListGroupItem className="d-flex justify-content-between">
+      <span>{review.comment}</span> <span>{review.rate}</span>
+      <Button
+        variant="danger"
+        onClick={() => {
+          handleDelete();
+        }}
+      >
+        🗑️
+      </Button>
+    </ListGroupItem>
+  );
+};
 
 export default SingleComment;
